@@ -215,7 +215,7 @@ function App() {
 
       <Box position="fixed" bottom="50px" left="50px" width="340px" zIndex={1}>
         <Text fontSize={20} py={2}>
-          #スシゴーランド <br />
+          #スシノススメ <br />
           sushi-go-round.taniii.com
         </Text>
         <Text fontSize={12}>
