@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Box, useToast, Image, Text } from "@chakra-ui/react";
+import { Box, useToast, Image, Text, Link } from "@chakra-ui/react";
 import ConveyorSushi from "@/components/org/ConveyorSushi";
 import OrderedSushiList from "@/components/org/OrderedSushiList";
 
@@ -220,7 +220,10 @@ function App() {
         </Text>
         <Text fontSize={12}>
           designed by: <br />
-          Taniii @taniiicom <br />
+          <Link href="https://x.com/taniiicom" target="_blank">
+            Taniii @taniiicom
+          </Link>
+          <br />
           レコメンデーションデータセット: <br />
           www.kamishima.net/sushi/ <br />
           画像引用 : <br />
