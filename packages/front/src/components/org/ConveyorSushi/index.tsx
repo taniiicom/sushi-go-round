@@ -106,6 +106,7 @@ export default function ConveyorSushi({
         overflowX="scroll"
         overflowY="hidden"
         scrollBehavior="smooth" // ボタン押下時はスムーススクロール
+        alignContent="center"
       >
         {/* 無限ループ表示用に, ある程度多めに寿司を並べる */}
         {sushiList
