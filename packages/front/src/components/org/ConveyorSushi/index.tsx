@@ -92,9 +92,9 @@ export default function ConveyorSushi({
         transform="translateX(-50%)"
         zIndex={10}
       >
-        <Button onClick={handleBackward}>戻る</Button>
-        <Button onClick={handleForward}>進む</Button>
-        <Button onClick={handleResume}>自動</Button>
+        <Button onClick={handleBackward}>←</Button>
+        <Button onClick={handleForward}>→</Button>
+        <Button onClick={handleResume}>{"▶"}</Button>
       </HStack>
 
       {/* 横スクロールコンテナ */}
