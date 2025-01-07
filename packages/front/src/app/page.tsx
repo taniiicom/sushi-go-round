@@ -144,31 +144,36 @@ function App() {
     }
   }, [ratings]);
 
-  // 推論結果を現在のコンベアリストの「5件後」に挿入する関数
+  // 以下のように、API から返ってきた item_id をもとに、sushiData を検索して使う
   const insertRecommendedSushi = (
     recommendations: { item_id: string; score: number }[]
   ) => {
-    // 例: ループ用に item_id, name, imageUrl を用意
-    //     name, imageUrl は適宜サーバーから返すか, 事前にフロントでID→画像をマッピング
-    // ここでは ID→ダミーのデータに置き換える形でサンプル実装
-    // ---------------------------------------------------------
-    const recommendedItems = recommendations.map((rec, idx) => {
-      console.log(idx);
+    const recommendedItems = recommendations.map((rec) => {
       const itemIdNum = parseInt(rec.item_id, 10);
+      // sushiData の中から該当IDのオブジェクトを探す
+      const foundSushi = sushiData.find((s) => s.id === itemIdNum);
+
+      if (!foundSushi) {
+        // 万が一見つからなかったときは、適当なFallbackを返すか、あるいは null を返す
+        return {
+          id: itemIdNum,
+          name: `未登録ID: ${itemIdNum}`,
+          imageUrl: "https://example.com/unknown.png",
+          isRecommended: true,
+        };
+      }
+
+      // 見つかった寿司データをコピーしつつ、isRecommended: true を追加
       return {
-        id: itemIdNum,
-        name: `推奨すし(${rec.item_id})`,
-        imageUrl: "https://example.com/recommended.png",
-        isRecommended: true, // 推奨マーク
+        ...foundSushi,
+        isRecommended: true,
       };
     });
 
-    // 例として「先頭から数えて5件後ろ」の位置にまとめて挿入
-    // もしスクロール位置や現在見えている寿司のインデックスをトラッキングするなら
-    // その位置 +5 などに挿入する方法もあり
-    const insertIndex = 5;
+    // あとは、挿入処理 (例: 「5件後ろ」の位置にまとめて挿入)
     setAllSushiList((prev) => {
       const newList = [...prev];
+      const insertIndex = 5;
       recommendedItems.forEach((item, i) => {
         newList.splice(insertIndex + i, 0, item);
       });
