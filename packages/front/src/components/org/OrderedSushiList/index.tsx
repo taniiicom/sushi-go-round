@@ -15,6 +15,7 @@ type OrderedSushiListProps = {
   orderedSushi: Sushi[];
 };
 
+// [uiux][design][animation] OrderedSushiList > 注文時にホップアニメーションを追加 ^^
 // Chakra UIのBoxをmotion対応させたカスタムコンポーネント
 const MotionBox = chakra(motion.div);
 
@@ -32,15 +33,19 @@ export default function OrderedSushiList({
               // 初期(マウント時)の状態
               initial={{ y: 50, opacity: 0, scale: 0.8 }}
               // アニメーション完了時の状態
-              animate={{ y: 0, opacity: 1, scale: 1 }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                // “spring”でちょっと弾む動きに
+                transition: {
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 15,
+                },
+              }}
               // アンマウント時(今回は削除はしない想定なので省略可)
               exit={{ y: -50, opacity: 0, scale: 0.8 }}
-              // “spring”でちょっと弾む動きに
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 15,
-              }}
               mr="16px"
               textAlign="center"
             >
