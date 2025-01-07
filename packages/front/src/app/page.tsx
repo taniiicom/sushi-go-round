@@ -219,6 +219,8 @@ function App() {
           sushi-go-round.taniii.com
         </Text>
         <Text fontSize={12}>
+          レコメンデーションデータセット: <br />
+          www.kamishima.net/sushi/ <br />
           画像引用 : <br />
           www.hama-sushi.co.jp/menu/ <br />
           www.akindo-sushiro.co.jp/menu/ <br />
