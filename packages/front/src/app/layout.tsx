@@ -17,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "#スシゴーランド - sushi-go-round",
+  title: "#スシノススメ - sushi-go-round",
   description: "廻るお寿司の推薦システム",
 };
 
