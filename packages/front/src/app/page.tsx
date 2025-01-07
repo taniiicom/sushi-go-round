@@ -5,8 +5,7 @@ import { Box } from "@chakra-ui/react";
 import ConveyorSushi from "@/components/org/ConveyorSushi";
 import OrderedSushiList from "@/components/org/OrderedSushiList";
 
-// サンプル用に寿司データを定義
-// 画像URLは実際のものに置き換えてください
+// dataset
 const sushiData = [
   { id: 0, name: "えび", imageUrl: "media/sushi/0.png" },
   { id: 1, name: "穴子", imageUrl: "media/sushi/1.png" },
