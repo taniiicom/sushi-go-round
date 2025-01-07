@@ -3,15 +3,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, HStack, Image } from "@chakra-ui/react";
 
-type Sushi = {
+type SushiData = {
   id: number;
   name: string;
   imageUrl: string;
+  isRecommended?: boolean; // 追加
 };
 
 type ConveyorSushiProps = {
-  sushiList: Sushi[];
-  onSushiClick: (sushi: Sushi) => void;
+  sushiList: SushiData[];
+  onSushiClick: (sushi: SushiData) => void;
 };
 
 export default function ConveyorSushi({
@@ -112,24 +113,30 @@ export default function ConveyorSushi({
         {sushiList
           .concat(sushiList)
           .concat(sushiList)
-          .map((sushi, idx) => (
-            <Box
-              key={`${sushi.id}-${idx}`}
-              display="inline-block"
-              width="250px"
-              textAlign="center"
-              cursor="pointer"
-              onClick={() => onSushiClick(sushi)}
-            >
-              <Image
-                src={sushi.imageUrl}
-                alt={sushi.name}
-                width="200px"
-                mx="auto"
-              />
-              <Box fontSize={22}>{sushi.name}</Box>
-            </Box>
-          ))}
+          .map((sushi, idx) => {
+            // isRecommended なら, 背景色を薄い黄色に
+            const bgColor = sushi.isRecommended ? "yellow.100" : "transparent";
+            return (
+              <Box
+                key={`${sushi.id}-${idx}`}
+                display="inline-block"
+                width="250px"
+                textAlign="center"
+                cursor="pointer"
+                bg={bgColor}
+                p={2}
+                onClick={() => onSushiClick(sushi)}
+              >
+                <Image
+                  src={sushi.imageUrl}
+                  alt={sushi.name}
+                  width="200px"
+                  mx="auto"
+                />
+                <Box fontSize={22}>{sushi.name}</Box>
+              </Box>
+            );
+          })}
       </Box>
     </Box>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Box, Flex, Image, HStack } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { chakra } from "@chakra-ui/react";
@@ -14,6 +14,8 @@ type Sushi = {
 
 type OrderedSushiListProps = {
   orderedSushi: Sushi[];
+  onRatingChange: (sushiId: number, rating: number) => void;
+  ratings: Record<number, number>; // すしID→評価
 };
 
 // [uiux][design][animation] OrderedSushiList > 注文時にホップアニメーションを追加 ^^
@@ -22,15 +24,9 @@ const MotionBox = chakra(motion.div);
 
 export default function OrderedSushiList({
   orderedSushi,
+  onRatingChange,
+  ratings,
 }: OrderedSushiListProps) {
-  // すしID → 評価値(0〜5) を持つマップ
-  const [ratings, setRatings] = useState<Record<number, number>>({});
-
-  // 星がクリックされたときに評価値をセット
-  const handleStarClick = (sushiId: number, starValue: number) => {
-    setRatings((prev) => ({ ...prev, [sushiId]: starValue }));
-  };
-
   return (
     <Box width="100%" height="100%" overflowX="auto">
       {/* AnimatePresence でマウント/アンマウント時のアニメーションを制御 */}
@@ -61,6 +57,7 @@ export default function OrderedSushiList({
                 exit={{ y: -50, opacity: 0, scale: 0.8 }}
                 mr="16px"
                 textAlign="center"
+                zIndex={100}
               >
                 {/* すし画像 */}
                 <Image
@@ -74,13 +71,13 @@ export default function OrderedSushiList({
                 {/* 5つ星評価 */}
                 <HStack justify="center" spacing={1} mt={2}>
                   {/* 星の数だけ配列を作り, mapでアイコンを出力 */}
-                  {[1, 2, 3, 4, 5].map((star) => {
-                    const isActive = star <= rating;
+                  {[1, 2, 3, 4, 5].map((starValue) => {
+                    const isActive = starValue <= rating;
                     return (
                       <Box
-                        key={star}
+                        key={starValue}
                         cursor="pointer"
-                        onClick={() => handleStarClick(sushi.id, star)}
+                        onClick={() => onRatingChange(sushi.id, starValue)}
                       >
                         {isActive ? (
                           <AiFillStar color="gold" size={24} />
