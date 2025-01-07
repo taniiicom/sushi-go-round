@@ -57,6 +57,7 @@ export default function OrderedSushiList({
                 exit={{ y: -50, opacity: 0, scale: 0.8 }}
                 mr="16px"
                 textAlign="center"
+                zIndex={100}
               >
                 {/* すし画像 */}
                 <Image

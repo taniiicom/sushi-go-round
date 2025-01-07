@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Box, useToast } from "@chakra-ui/react";
+import { Box, useToast, Image, Text } from "@chakra-ui/react";
 import ConveyorSushi from "@/components/org/ConveyorSushi";
 import OrderedSushiList from "@/components/org/OrderedSushiList";
 
@@ -200,6 +200,30 @@ function App() {
           onRatingChange={handleRatingChange}
           ratings={ratings}
         />
+      </Box>
+
+      <Box
+        position="fixed"
+        bottom="50px"
+        right="50px"
+        width="340px"
+        height="340px"
+        zIndex={0}
+      >
+        <Image src="media/sushi-go-round_qr.png" alt="" />
+      </Box>
+
+      <Box position="fixed" bottom="50px" left="50px" width="340px" zIndex={1}>
+        <Text fontSize={20} py={2}>
+          #スシゴーランド <br />
+          sushi-go-round.taniii.com
+        </Text>
+        <Text fontSize={12}>
+          画像引用 : <br />
+          www.hama-sushi.co.jp/menu/ <br />
+          www.akindo-sushiro.co.jp/menu/ <br />
+          www.kurasushi.co.jp/menu/
+        </Text>
       </Box>
     </Box>
   );
