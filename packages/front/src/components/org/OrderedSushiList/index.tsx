@@ -52,7 +52,7 @@ export default function OrderedSushiList({
               <Image
                 src={sushi.imageUrl}
                 alt={sushi.name}
-                width="80px"
+                width="200px"
                 mx="auto"
               />
               <Box>{sushi.name}</Box>

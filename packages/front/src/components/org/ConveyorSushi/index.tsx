@@ -115,7 +115,7 @@ export default function ConveyorSushi({
             <Box
               key={`${sushi.id}-${idx}`}
               display="inline-block"
-              width="200px"
+              width="250px"
               textAlign="center"
               cursor="pointer"
               onClick={() => onSushiClick(sushi)}
@@ -123,7 +123,7 @@ export default function ConveyorSushi({
               <Image
                 src={sushi.imageUrl}
                 alt={sushi.name}
-                width="150px"
+                width="200px"
                 mx="auto"
               />
               <Box>{sushi.name}</Box>
