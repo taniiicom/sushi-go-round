@@ -1,101 +1,83 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useState } from "react";
+import { Box } from "@chakra-ui/react";
+import ConveyorSushi from "@/components/org/ConveyorSushi";
+import OrderedSushiList from "@/components/org/OrderedSushiList";
+
+// dataset
+const sushiData = [
+  { id: 0, name: "えび", imageUrl: "media/sushi/0.png" },
+  { id: 1, name: "穴子", imageUrl: "media/sushi/1.png" },
+  { id: 3, name: "いか", imageUrl: "media/sushi/3.png" },
+  { id: 5, name: "たこ", imageUrl: "media/sushi/5.png" },
+  { id: 6, name: "いくら", imageUrl: "media/sushi/6.png" },
+  { id: 2, name: "まぐろ", imageUrl: "media/sushi/2.png" },
+  { id: 4, name: "うに", imageUrl: "media/sushi/4.png" },
+  { id: 7, name: "玉子", imageUrl: "media/sushi/7.png" },
+  { id: 8, name: "とろ", imageUrl: "media/sushi/8.png" },
+  { id: 10, name: "ほたて貝", imageUrl: "media/sushi/10.png" },
+  { id: 9, name: "甘えび", imageUrl: "media/sushi/9.png" },
+  { id: 11, name: "たい", imageUrl: "media/sushi/11.png" },
+  { id: 12, name: "赤貝", imageUrl: "media/sushi/12.png" },
+  { id: 13, name: "はまち", imageUrl: "media/sushi/13.png" },
+  { id: 14, name: "あわび", imageUrl: "media/sushi/14.png" },
+  { id: 15, name: "サーモン", imageUrl: "media/sushi/15.png" },
+  { id: 17, name: "しゃこ", imageUrl: "media/sushi/17.png" },
+  { id: 16, name: "数の子", imageUrl: "media/sushi/16.png" },
+  { id: 18, name: "さば", imageUrl: "media/sushi/18.png" },
+  { id: 19, name: "中とろ", imageUrl: "media/sushi/19.png" },
+  { id: 21, name: "あじ", imageUrl: "media/sushi/21.png" },
+  { id: 20, name: "ひらめ", imageUrl: "media/sushi/20.png" },
+  { id: 22, name: "かに", imageUrl: "media/sushi/22.png" },
+  { id: 23, name: "こはだ", imageUrl: "media/sushi/23.png" },
+  { id: 25, name: "うなぎ", imageUrl: "media/sushi/25.png" },
+  { id: 24, name: "とり貝", imageUrl: "media/sushi/24.png" },
+  { id: 26, name: "鉄火巻", imageUrl: "media/sushi/26.png" },
+  { id: 27, name: "かんぱち", imageUrl: "media/sushi/27.png" },
+  { id: 28, name: "みる貝", imageUrl: "media/sushi/28.png" },
+  { id: 30, name: "げそ", imageUrl: "media/sushi/30.png" },
+  { id: 29, name: "かっぱ巻", imageUrl: "media/sushi/29.png" },
+  { id: 31, name: "かつお", imageUrl: "media/sushi/31.png" },
+  { id: 33, name: "ほっき貝", imageUrl: "media/sushi/33.png" },
+  { id: 34, name: "しま鯵", imageUrl: "media/sushi/34.png" },
+  { id: 35, name: "かにみそ", imageUrl: "media/sushi/35.png" },
+  { id: 37, name: "ねぎとろ", imageUrl: "media/sushi/37.png" },
+  { id: 32, name: "いわし", imageUrl: "media/sushi/32.png" },
+  { id: 38, name: "納豆巻", imageUrl: "media/sushi/38.png" },
+  { id: 36, name: "えんがわ", imageUrl: "media/sushi/36.png" },
+  { id: 39, name: "さより", imageUrl: "media/sushi/39.png" },
+  { id: 40, name: "たくわん巻", imageUrl: "media/sushi/40.png" },
+  { id: 41, name: "ぼたんえび", imageUrl: "media/sushi/41.png" },
+];
+
+function App() {
+  const [orderedSushi, setOrderedSushi] = useState<
+    { id: number; name: string; imageUrl: string }[]
+  >([]);
+
+  // 寿司がクリックされたら, 下半分に追加する
+  const handleSushiClick = (sushi: {
+    id: number;
+    name: string;
+    imageUrl: string;
+  }) => {
+    setOrderedSushi((prev) => [...prev, sushi]);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Box width="100vw" height="100vh" overflow="hidden">
+      {/* 上半分: コンベア */}
+      <Box height="50%" borderBottom="1px solid #ccc">
+        <ConveyorSushi sushiList={sushiData} onSushiClick={handleSushiClick} />
+      </Box>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      {/* 下半分: 注文リスト */}
+      <Box height="50%">
+        <OrderedSushiList orderedSushi={orderedSushi} />
+      </Box>
+    </Box>
   );
 }
+
+export default App;
