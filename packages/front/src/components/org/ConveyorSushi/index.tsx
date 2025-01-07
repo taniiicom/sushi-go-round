@@ -126,7 +126,7 @@ export default function ConveyorSushi({
                 width="200px"
                 mx="auto"
               />
-              <Box>{sushi.name}</Box>
+              <Box fontSize={22}>{sushi.name}</Box>
             </Box>
           ))}
       </Box>
