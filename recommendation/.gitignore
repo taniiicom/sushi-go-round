@@ -1,0 +1,24 @@
+# Python関連
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment (仮想環境ディレクトリを除外)
+venv/
+
+# 環境構成を残すためのファイル
+!requirements.txt
+!Pipfile
+!Pipfile.lock
+!pyproject.toml
+!poetry.lock
+
+# IDE/エディタ関連
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# その他
+*.log
+.DS_Store
+Thumbs.db
