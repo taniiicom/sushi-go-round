@@ -1,4 +1,5 @@
 # server.py
+import numpy as np
 import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -74,6 +75,30 @@ def recommend():
         result.append({"item_id": item_id, "score": score})
 
     return jsonify(result)
+
+
+def calculate_ndcg(ratings, predicted_scores):
+    dcg = np.sum((2**ratings - 1) / np.log2(np.arange(1, len(ratings) + 1) + 1))
+    idcg = np.sum(
+        (2 ** sorted(ratings, reverse=True) - 1)
+        / np.log2(np.arange(1, len(ratings) + 1) + 1)
+    )
+    return dcg / idcg
+
+
+@app.route("/api/recommendation/ratings", methods=["POST"])
+def log_ratings():
+    data = request.json
+    ratings = data.get("ratings")
+    if not ratings or len(ratings) != 5:
+        return jsonify({"error": "Invalid ratings data"}), 400
+
+    # Assuming predicted_scores are available
+    predicted_scores = [4, 3, 5, 2, 1]  # Example predicted scores
+    ndcg_score = calculate_ndcg(ratings, predicted_scores)
+    app.logger.info(f"NDCG Score: {ndcg_score}")
+
+    return jsonify({"message": "Ratings received", "ndcg_score": ndcg_score})
 
 
 if __name__ == "__main__":
