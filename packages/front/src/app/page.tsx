@@ -116,17 +116,20 @@ function App() {
     const ratedSushiIds = Object.keys(ratings);
     if (ratedSushiIds.length === 5) {
       // 例として固定ユーザID = "tempUser"
-      fetch("http://localhost:5555/recommend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: "tempUser",
-          ratings: ratedSushiIds.map((id) => ({
-            item_id: id,
-            rating: ratings[+id],
-          })),
-        }),
-      })
+      fetch(
+        "https://sushi-go-round-56359732561.asia-northeast1.run.app/recommend",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: "tempUser",
+            ratings: ratedSushiIds.map((id) => ({
+              item_id: id,
+              rating: ratings[+id],
+            })),
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((data: { item_id: string; score: number }[]) => {
           // 推論結果をコンベアに挿入

@@ -23,6 +23,8 @@ app = FastAPI(
 # CORS設定
 origins = [
     "http://localhost:3000",  # Reactのデフォルト開発環境URL
+    "https://sushi-go-round.taniii.com",
+    "http://sushi-go-round.taniii.com",
     # 必要に応じて本番環境URLを追加
 ]
 
