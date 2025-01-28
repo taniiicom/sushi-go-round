@@ -1,3 +1,7 @@
+https://github.com/user-attachments/assets/11cc11a0-51e4-4058-af44-cc4d46454b3e
+
+https://github.com/user-attachments/assets/17f945b5-86cd-4816-bf7f-1f261670104c
+
 # create-nexpress-app
 
 Next.js x Express x Prisma x OpenAPI x TS の高速開発モノレポテンプレート
