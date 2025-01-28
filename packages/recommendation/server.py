@@ -1,11 +1,9 @@
 # server.py
 import pandas as pd
 from flask import Flask, jsonify, request
-from flask_cors import CORS
 from surprise import Dataset, KNNBaseline, Reader
 
 app = Flask(__name__)
-CORS(app)  # これで全エンドポイントに対して CORS を許可
 
 # 学習用CSV (user_id, item_id, rating) があるパス
 TRAIN_DATA_PATH = "./data/sushi_dataset_filtered_v2_for_surprise.csv"
@@ -77,4 +75,4 @@ def recommend():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
